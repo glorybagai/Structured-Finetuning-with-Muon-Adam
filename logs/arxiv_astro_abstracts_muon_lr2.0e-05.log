@@ -1,0 +1,10 @@
+=== arxiv_astro_abstracts / muon / lr=2.0e-05 ===
+[step 25] train_loss=2.5762 eval_loss=2.5581 elapsed=62.0s
+[step 50] train_loss=2.6091 eval_loss=2.5329 elapsed=122.3s
+[step 75] train_loss=2.5610 eval_loss=2.5149 elapsed=182.1s
+[step 100] train_loss=2.5412 eval_loss=2.4991 elapsed=242.1s
+[step 125] train_loss=2.5311 eval_loss=2.4858 elapsed=301.5s
+[step 150] train_loss=2.5015 eval_loss=2.4740 elapsed=361.6s
+[step 175] train_loss=2.4790 eval_loss=2.4639 elapsed=422.1s
+[step 200] train_loss=2.4704 eval_loss=2.4531 elapsed=481.6s
+[final] step=200 eval_loss=2.4531 elapsed=483.0s

@@ -1,0 +1,15 @@
+Loading model Qwen/Qwen3-4B...
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 14377.91it/s]
+Model loaded.
+NOTE: 'arxiv_astro_abstracts' is a gated dataset — make sure you've accepted its terms on the HF hub and are logged in (or pass a token).
+Map:   0%|          | 0/6400 [00:00<?, ? examples/s]Map:   5%|▍         | 310/6400 [00:00<00:01, 3069.21 examples/s]Map:  10%|█         | 662/6400 [00:00<00:01, 3318.84 examples/s]Map:  16%|█▌        | 1000/6400 [00:00<00:02, 2588.76 examples/s]Map:  21%|██        | 1343/6400 [00:00<00:01, 2864.07 examples/s]Map:  26%|██▌       | 1676/6400 [00:00<00:01, 3014.03 examples/s]Map:  31%|███▏      | 2000/6400 [00:00<00:01, 2924.30 examples/s]Map:  36%|███▋      | 2329/6400 [00:00<00:01, 3029.51 examples/s]Map:  42%|████▏     | 2673/6400 [00:00<00:01, 3147.82 examples/s]Map:  47%|████▋     | 3000/6400 [00:01<00:01, 3038.49 examples/s]Map:  52%|█████▏    | 3328/6400 [00:01<00:00, 3105.83 examples/s]Map:  57%|█████▋    | 3649/6400 [00:01<00:00, 3135.29 examples/s]Map:  62%|██████▏   | 3987/6400 [00:01<00:00, 3204.01 examples/s]Map:  69%|██████▉   | 4413/6400 [00:01<00:00, 3059.44 examples/s]Map:  74%|███████▍  | 4758/6400 [00:01<00:00, 3163.16 examples/s]Map:  81%|████████  | 5186/6400 [00:01<00:00, 3046.80 examples/s]Map:  86%|████████▋ | 5528/6400 [00:01<00:00, 3138.12 examples/s]Map:  92%|█████████▏| 5864/6400 [00:01<00:00, 3196.66 examples/s]Map:  99%|█████████▉| 6331/6400 [00:02<00:00, 3076.38 examples/s]Map: 100%|██████████| 6400/6400 [00:02<00:00, 3049.12 examples/s]
+Map:   0%|          | 0/100 [00:00<?, ? examples/s]Map: 100%|██████████| 100/100 [00:00<00:00, 2412.00 examples/s]
+[step 25] train_loss=2.4770 eval_loss=2.3923 elapsed=44.7s
+[step 50] train_loss=2.3893 eval_loss=2.3465 elapsed=89.5s
+[step 75] train_loss=2.3664 eval_loss=2.3158 elapsed=133.6s
+[step 100] train_loss=2.3302 eval_loss=2.2921 elapsed=178.2s
+[step 125] train_loss=2.2978 eval_loss=2.2771 elapsed=222.8s
+[step 150] train_loss=2.2689 eval_loss=2.2695 elapsed=267.9s
+[step 175] train_loss=2.2751 eval_loss=2.2645 elapsed=312.8s
+[step 200] train_loss=2.2684 eval_loss=2.2601 elapsed=357.3s
+[final] step=200 eval_loss=2.2601 elapsed=358.7s

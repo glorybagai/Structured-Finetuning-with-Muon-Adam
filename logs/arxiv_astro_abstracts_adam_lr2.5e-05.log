@@ -1,0 +1,10 @@
+=== arxiv_astro_abstracts / adam / lr=2.5e-05 ===
+[step 25] train_loss=2.3171 eval_loss=2.2479 elapsed=45.2s
+[step 50] train_loss=2.2623 eval_loss=2.2285 elapsed=89.7s
+[step 75] train_loss=2.2368 eval_loss=2.2214 elapsed=134.2s
+[step 100] train_loss=2.2295 eval_loss=2.2172 elapsed=179.1s
+[step 125] train_loss=2.2179 eval_loss=2.2108 elapsed=223.7s
+[step 150] train_loss=2.2054 eval_loss=2.2082 elapsed=268.8s
+[step 175] train_loss=2.2126 eval_loss=2.2035 elapsed=313.1s
+[step 200] train_loss=2.2273 eval_loss=2.1992 elapsed=356.9s
+[final] step=200 eval_loss=2.1992 elapsed=358.3s

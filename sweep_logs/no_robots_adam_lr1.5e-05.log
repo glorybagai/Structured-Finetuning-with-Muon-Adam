@@ -1,0 +1,22 @@
+Loading model Qwen/Qwen3-4B...
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5993.05it/s]
+Model loaded.
+Map:   0%|          | 0/6400 [00:00<?, ? examples/s]Map:   2%|▏         | 144/6400 [00:00<00:04, 1420.92 examples/s]Map:   5%|▍         | 310/6400 [00:00<00:03, 1550.43 examples/s]Map:   8%|▊         | 504/6400 [00:00<00:03, 1725.71 examples/s]Map:  12%|█▏        | 759/6400 [00:00<00:03, 1707.71 examples/s]Map:  16%|█▌        | 1000/6400 [00:00<00:03, 1414.23 examples/s]Map:  18%|█▊        | 1167/6400 [00:00<00:03, 1477.05 examples/s]Map:  21%|██        | 1332/6400 [00:00<00:03, 1517.86 examples/s]Map:  24%|██▎       | 1507/6400 [00:00<00:03, 1575.98 examples/s]Map:  26%|██▋       | 1680/6400 [00:01<00:02, 1615.87 examples/s]Map:  30%|██▉       | 1911/6400 [00:01<00:02, 1581.87 examples/s]Map:  33%|███▎      | 2104/6400 [00:01<00:02, 1470.61 examples/s]Map:  35%|███▌      | 2267/6400 [00:01<00:02, 1509.19 examples/s]Map:  38%|███▊      | 2433/6400 [00:01<00:02, 1543.43 examples/s]Map:  41%|████      | 2604/6400 [00:01<00:02, 1585.63 examples/s]Map:  43%|████▎     | 2781/6400 [00:01<00:02, 1633.97 examples/s]Map:  47%|████▋     | 3000/6400 [00:01<00:02, 1522.38 examples/s]Map:  50%|█████     | 3225/6400 [00:02<00:02, 1509.20 examples/s]Map:  53%|█████▎    | 3386/6400 [00:02<00:01, 1532.83 examples/s]Map:  55%|█████▌    | 3550/6400 [00:02<00:01, 1559.00 examples/s]Map:  58%|█████▊    | 3722/6400 [00:02<00:01, 1590.83 examples/s]Map:  61%|██████    | 3887/6400 [00:02<00:01, 1602.69 examples/s]Map:  64%|██████▍   | 4090/6400 [00:02<00:01, 1505.39 examples/s]Map:  66%|██████▋   | 4256/6400 [00:02<00:01, 1540.24 examples/s]Map:  69%|██████▉   | 4430/6400 [00:02<00:01, 1589.98 examples/s]Map:  72%|███████▏  | 4593/6400 [00:02<00:01, 1598.55 examples/s]Map:  74%|███████▍  | 4766/6400 [00:03<00:01, 1631.57 examples/s]Map:  78%|███████▊  | 5000/6400 [00:03<00:00, 1501.57 examples/s]Map:  81%|████████  | 5159/6400 [00:03<00:00, 1523.42 examples/s]Map:  83%|████████▎ | 5335/6400 [00:03<00:00, 1573.32 examples/s]Map:  87%|████████▋ | 5579/6400 [00:03<00:00, 1586.70 examples/s]Map:  91%|█████████ | 5834/6400 [00:03<00:00, 1622.82 examples/s]Map:  94%|█████████▍| 6029/6400 [00:03<00:00, 1513.06 examples/s]Map:  98%|█████████▊| 6252/6400 [00:04<00:00, 1498.16 examples/s]Map: 100%|██████████| 6400/6400 [00:04<00:00, 1543.89 examples/s]
+WARNING: full_ids does not start with prompt_ids — tokenization may not be prefix-stable
+WARNING: full_ids does not start with prompt_ids — tokenization may not be prefix-stable
+WARNING: full_ids does not start with prompt_ids — tokenization may not be prefix-stable
+WARNING: full_ids does not start with prompt_ids — tokenization may not be prefix-stable
+WARNING: full_ids does not start with prompt_ids — tokenization may not be prefix-stable
+WARNING: full_ids does not start with prompt_ids — tokenization may not be prefix-stable
+WARNING: full_ids does not start with prompt_ids — tokenization may not be prefix-stable
+WARNING: full_ids does not start with prompt_ids — tokenization may not be prefix-stable
+Map:   0%|          | 0/100 [00:00<?, ? examples/s]Map: 100%|██████████| 100/100 [00:00<00:00, 1283.64 examples/s]
+[step 25] train_loss=2.0949 eval_loss=1.9450 elapsed=61.8s
+[step 50] train_loss=1.9016 eval_loss=1.9248 elapsed=119.8s
+[step 75] train_loss=1.8759 eval_loss=1.9192 elapsed=181.3s
+[step 100] train_loss=1.9703 eval_loss=1.9123 elapsed=242.5s
+[step 125] train_loss=1.9010 eval_loss=1.9109 elapsed=300.8s
+[step 150] train_loss=1.9210 eval_loss=1.9077 elapsed=360.1s
+[step 175] train_loss=1.9389 eval_loss=1.9057 elapsed=416.8s
+[step 200] train_loss=1.9322 eval_loss=1.9028 elapsed=474.5s
+[final] step=200 eval_loss=1.9028 elapsed=476.6s

@@ -1,0 +1,12 @@
+Loading model Qwen/Qwen3-4B...
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 16739.53it/s]
+Model loaded.
+[step 25] train_loss=0.2808 eval_loss=0.2317 elapsed=60.5s
+[step 50] train_loss=0.2158 eval_loss=0.2246 elapsed=121.6s
+[step 75] train_loss=0.2117 eval_loss=0.2218 elapsed=180.1s
+[step 100] train_loss=0.2088 eval_loss=0.2169 elapsed=238.8s
+[step 125] train_loss=0.2013 eval_loss=0.2157 elapsed=297.7s
+[step 150] train_loss=0.2016 eval_loss=0.2108 elapsed=357.5s
+[step 175] train_loss=0.1994 eval_loss=0.2098 elapsed=417.7s
+[step 200] train_loss=0.1964 eval_loss=0.2154 elapsed=476.6s
+[final] step=200 eval_loss=0.2154 elapsed=477.9s

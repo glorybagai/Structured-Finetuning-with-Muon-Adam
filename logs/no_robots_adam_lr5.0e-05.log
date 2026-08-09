@@ -1,0 +1,10 @@
+=== no_robots / adam / lr=5.0e-05 ===
+[step 25] train_loss=2.0779 eval_loss=1.9525 elapsed=59.6s
+[step 50] train_loss=1.9722 eval_loss=1.9415 elapsed=118.1s
+[step 75] train_loss=1.9228 eval_loss=1.9373 elapsed=179.0s
+[step 100] train_loss=1.9630 eval_loss=1.9331 elapsed=237.3s
+[step 125] train_loss=1.8929 eval_loss=1.9301 elapsed=297.1s
+[step 150] train_loss=1.9227 eval_loss=1.9275 elapsed=354.0s
+[step 175] train_loss=1.9217 eval_loss=1.9308 elapsed=413.7s
+[step 200] train_loss=1.9614 eval_loss=1.9298 elapsed=472.6s
+[final] step=200 eval_loss=1.9298 elapsed=474.6s
