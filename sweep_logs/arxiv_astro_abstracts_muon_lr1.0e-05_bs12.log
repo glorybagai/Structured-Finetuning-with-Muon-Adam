@@ -1,0 +1,7 @@
+Loading model Qwen/Qwen3-4B...
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 18068.33it/s]
+Model loaded.
+NOTE: 'arxiv_astro_abstracts' is a gated dataset — make sure you've accepted its terms on the HF hub and are logged in (or pass a token).
+[step 25] train_loss=2.5576 eval_loss=2.5024 elapsed=183.1s
+[step 50] train_loss=2.5221 eval_loss=2.4711 elapsed=364.8s
+[final] step=66 eval_loss=2.4556 elapsed=486.0s

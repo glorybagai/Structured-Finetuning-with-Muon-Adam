@@ -1,0 +1,12 @@
+Loading model Qwen/Qwen3-4B...
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 12725.22it/s]
+Model loaded.
+'no_robots': dropped 44/6400 train and 2/100 test examples with no unmasked label tokens (prompt alone reached max_length=1024).
+[step 25] train_loss=2.0346 eval_loss=1.9266 elapsed=67.8s
+[step 50] train_loss=1.9688 eval_loss=1.9131 elapsed=140.2s
+[step 75] train_loss=1.9216 eval_loss=1.9067 elapsed=209.4s
+[step 100] train_loss=1.9407 eval_loss=1.9029 elapsed=278.1s
+[step 125] train_loss=1.9526 eval_loss=1.8989 elapsed=349.3s
+[step 150] train_loss=1.9122 eval_loss=1.8951 elapsed=418.8s
+[step 175] train_loss=1.8760 eval_loss=1.8951 elapsed=487.9s
+[final] step=198 eval_loss=1.8917 elapsed=554.7s

@@ -1,0 +1,136 @@
+nohup: ignoring input
+WARNING: requested --n_gpus 6 but only 4 free GPU(s) detected ([0, 1, 3, 4]); using [0, 1, 3, 4].
+Auto-detected free GPUs: [0, 1, 3, 4] -> using [0, 1, 3, 4]
+Queued 65 runs (['no_robots'] x ['adam', 'muon']) across GPUs [0, 1, 3, 4]
+[gpu 0] START no_robots_adam_lr5.0e-06_bs4
+[gpu 1] START no_robots_adam_lr1.0e-05_bs4
+[gpu 3] START no_robots_adam_lr1.5e-05_bs4
+[gpu 4] START no_robots_adam_lr2.0e-05_bs4
+[gpu 0] OK: no_robots_adam_lr5.0e-06_bs4 (log: sweep_logs/no_robots_adam_lr5.0e-06_bs4.log)
+[gpu 0] START no_robots_adam_lr2.5e-05_bs4
+[gpu 3] OK: no_robots_adam_lr1.5e-05_bs4 (log: sweep_logs/no_robots_adam_lr1.5e-05_bs4.log)
+[gpu 3] START no_robots_adam_lr3.0e-05_bs4
+[gpu 4] OK: no_robots_adam_lr2.0e-05_bs4 (log: sweep_logs/no_robots_adam_lr2.0e-05_bs4.log)
+[gpu 4] START no_robots_adam_lr3.5e-05_bs4
+[gpu 1] OK: no_robots_adam_lr1.0e-05_bs4 (log: sweep_logs/no_robots_adam_lr1.0e-05_bs4.log)
+[gpu 1] START no_robots_adam_lr4.0e-05_bs4
+[gpu 4] OK: no_robots_adam_lr3.5e-05_bs4 (log: sweep_logs/no_robots_adam_lr3.5e-05_bs4.log)
+[gpu 4] START no_robots_adam_lr5.0e-05_bs4
+[gpu 3] OK: no_robots_adam_lr3.0e-05_bs4 (log: sweep_logs/no_robots_adam_lr3.0e-05_bs4.log)
+[gpu 3] START no_robots_adam_lr7.0e-05_bs4
+[gpu 0] OK: no_robots_adam_lr2.5e-05_bs4 (log: sweep_logs/no_robots_adam_lr2.5e-05_bs4.log)
+[gpu 0] START no_robots_muon_lr1.0e-05_bs4
+[gpu 1] OK: no_robots_adam_lr4.0e-05_bs4 (log: sweep_logs/no_robots_adam_lr4.0e-05_bs4.log)
+[gpu 1] START no_robots_muon_lr1.0e-05_bs8
+[gpu 4] OK: no_robots_adam_lr5.0e-05_bs4 (log: sweep_logs/no_robots_adam_lr5.0e-05_bs4.log)
+[gpu 4] START no_robots_muon_lr1.0e-05_bs12
+[gpu 3] OK: no_robots_adam_lr7.0e-05_bs4 (log: sweep_logs/no_robots_adam_lr7.0e-05_bs4.log)
+[gpu 3] START no_robots_muon_lr1.0e-05_bs16
+[gpu 1] OK: no_robots_muon_lr1.0e-05_bs8 (log: sweep_logs/no_robots_muon_lr1.0e-05_bs8.log)
+[gpu 1] START no_robots_muon_lr1.0e-05_bs20
+[gpu 0] OK: no_robots_muon_lr1.0e-05_bs4 (log: sweep_logs/no_robots_muon_lr1.0e-05_bs4.log)
+[gpu 0] START no_robots_muon_lr2.0e-05_bs4
+[gpu 4] OK: no_robots_muon_lr1.0e-05_bs12 (log: sweep_logs/no_robots_muon_lr1.0e-05_bs12.log)
+[gpu 4] START no_robots_muon_lr2.0e-05_bs8
+[gpu 3] OK: no_robots_muon_lr1.0e-05_bs16 (log: sweep_logs/no_robots_muon_lr1.0e-05_bs16.log)
+[gpu 3] START no_robots_muon_lr2.0e-05_bs12
+[gpu 0] OK: no_robots_muon_lr2.0e-05_bs4 (log: sweep_logs/no_robots_muon_lr2.0e-05_bs4.log)
+[gpu 0] START no_robots_muon_lr2.0e-05_bs16
+[gpu 1] OK: no_robots_muon_lr1.0e-05_bs20 (log: sweep_logs/no_robots_muon_lr1.0e-05_bs20.log)
+[gpu 1] START no_robots_muon_lr2.0e-05_bs20
+[gpu 4] OK: no_robots_muon_lr2.0e-05_bs8 (log: sweep_logs/no_robots_muon_lr2.0e-05_bs8.log)
+[gpu 4] START no_robots_muon_lr5.0e-05_bs4
+[gpu 3] OK: no_robots_muon_lr2.0e-05_bs12 (log: sweep_logs/no_robots_muon_lr2.0e-05_bs12.log)
+[gpu 3] START no_robots_muon_lr5.0e-05_bs8
+[gpu 0] OK: no_robots_muon_lr2.0e-05_bs16 (log: sweep_logs/no_robots_muon_lr2.0e-05_bs16.log)
+[gpu 0] START no_robots_muon_lr5.0e-05_bs12
+[gpu 1] OK: no_robots_muon_lr2.0e-05_bs20 (log: sweep_logs/no_robots_muon_lr2.0e-05_bs20.log)
+[gpu 1] START no_robots_muon_lr5.0e-05_bs16
+[gpu 4] OK: no_robots_muon_lr5.0e-05_bs4 (log: sweep_logs/no_robots_muon_lr5.0e-05_bs4.log)
+[gpu 4] START no_robots_muon_lr5.0e-05_bs20
+[gpu 3] OK: no_robots_muon_lr5.0e-05_bs8 (log: sweep_logs/no_robots_muon_lr5.0e-05_bs8.log)
+[gpu 3] START no_robots_muon_lr7.0e-05_bs4
+[gpu 0] OK: no_robots_muon_lr5.0e-05_bs12 (log: sweep_logs/no_robots_muon_lr5.0e-05_bs12.log)
+[gpu 0] START no_robots_muon_lr7.0e-05_bs8
+[gpu 1] OK: no_robots_muon_lr5.0e-05_bs16 (log: sweep_logs/no_robots_muon_lr5.0e-05_bs16.log)
+[gpu 1] START no_robots_muon_lr7.0e-05_bs12
+[gpu 3] OK: no_robots_muon_lr7.0e-05_bs4 (log: sweep_logs/no_robots_muon_lr7.0e-05_bs4.log)
+[gpu 3] START no_robots_muon_lr7.0e-05_bs16
+[gpu 4] OK: no_robots_muon_lr5.0e-05_bs20 (log: sweep_logs/no_robots_muon_lr5.0e-05_bs20.log)
+[gpu 4] START no_robots_muon_lr7.0e-05_bs20
+[gpu 0] OK: no_robots_muon_lr7.0e-05_bs8 (log: sweep_logs/no_robots_muon_lr7.0e-05_bs8.log)
+[gpu 0] START no_robots_muon_lr1.0e-04_bs4
+[gpu 1] OK: no_robots_muon_lr7.0e-05_bs12 (log: sweep_logs/no_robots_muon_lr7.0e-05_bs12.log)
+[gpu 1] START no_robots_muon_lr1.0e-04_bs8
+[gpu 3] OK: no_robots_muon_lr7.0e-05_bs16 (log: sweep_logs/no_robots_muon_lr7.0e-05_bs16.log)
+[gpu 3] START no_robots_muon_lr1.0e-04_bs12
+[gpu 0] OK: no_robots_muon_lr1.0e-04_bs4 (log: sweep_logs/no_robots_muon_lr1.0e-04_bs4.log)
+[gpu 0] START no_robots_muon_lr1.0e-04_bs16
+[gpu 4] OK: no_robots_muon_lr7.0e-05_bs20 (log: sweep_logs/no_robots_muon_lr7.0e-05_bs20.log)
+[gpu 4] START no_robots_muon_lr1.0e-04_bs20
+[gpu 1] OK: no_robots_muon_lr1.0e-04_bs8 (log: sweep_logs/no_robots_muon_lr1.0e-04_bs8.log)
+[gpu 1] START no_robots_muon_lr1.5e-04_bs4
+[gpu 3] OK: no_robots_muon_lr1.0e-04_bs12 (log: sweep_logs/no_robots_muon_lr1.0e-04_bs12.log)
+[gpu 3] START no_robots_muon_lr1.5e-04_bs8
+[gpu 0] OK: no_robots_muon_lr1.0e-04_bs16 (log: sweep_logs/no_robots_muon_lr1.0e-04_bs16.log)
+[gpu 0] START no_robots_muon_lr1.5e-04_bs12
+[gpu 4] OK: no_robots_muon_lr1.0e-04_bs20 (log: sweep_logs/no_robots_muon_lr1.0e-04_bs20.log)
+[gpu 4] START no_robots_muon_lr1.5e-04_bs16
+[gpu 1] OK: no_robots_muon_lr1.5e-04_bs4 (log: sweep_logs/no_robots_muon_lr1.5e-04_bs4.log)
+[gpu 1] START no_robots_muon_lr1.5e-04_bs20
+[gpu 3] OK: no_robots_muon_lr1.5e-04_bs8 (log: sweep_logs/no_robots_muon_lr1.5e-04_bs8.log)
+[gpu 3] START no_robots_muon_lr2.0e-04_bs4
+[gpu 0] OK: no_robots_muon_lr1.5e-04_bs12 (log: sweep_logs/no_robots_muon_lr1.5e-04_bs12.log)
+[gpu 0] START no_robots_muon_lr2.0e-04_bs8
+[gpu 4] OK: no_robots_muon_lr1.5e-04_bs16 (log: sweep_logs/no_robots_muon_lr1.5e-04_bs16.log)
+[gpu 4] START no_robots_muon_lr2.0e-04_bs12
+[gpu 1] OK: no_robots_muon_lr1.5e-04_bs20 (log: sweep_logs/no_robots_muon_lr1.5e-04_bs20.log)
+[gpu 1] START no_robots_muon_lr2.0e-04_bs16
+[gpu 3] OK: no_robots_muon_lr2.0e-04_bs4 (log: sweep_logs/no_robots_muon_lr2.0e-04_bs4.log)
+[gpu 3] START no_robots_muon_lr2.0e-04_bs20
+[gpu 0] OK: no_robots_muon_lr2.0e-04_bs8 (log: sweep_logs/no_robots_muon_lr2.0e-04_bs8.log)
+[gpu 0] START no_robots_muon_lr3.0e-04_bs4
+[gpu 4] OK: no_robots_muon_lr2.0e-04_bs12 (log: sweep_logs/no_robots_muon_lr2.0e-04_bs12.log)
+[gpu 4] START no_robots_muon_lr3.0e-04_bs8
+[gpu 1] OK: no_robots_muon_lr2.0e-04_bs16 (log: sweep_logs/no_robots_muon_lr2.0e-04_bs16.log)
+[gpu 1] START no_robots_muon_lr3.0e-04_bs12
+[gpu 0] OK: no_robots_muon_lr3.0e-04_bs4 (log: sweep_logs/no_robots_muon_lr3.0e-04_bs4.log)
+[gpu 0] START no_robots_muon_lr3.0e-04_bs16
+[gpu 3] OK: no_robots_muon_lr2.0e-04_bs20 (log: sweep_logs/no_robots_muon_lr2.0e-04_bs20.log)
+[gpu 3] START no_robots_muon_lr3.0e-04_bs20
+[gpu 4] OK: no_robots_muon_lr3.0e-04_bs8 (log: sweep_logs/no_robots_muon_lr3.0e-04_bs8.log)
+[gpu 4] START no_robots_muon_lr5.0e-04_bs4
+[gpu 1] OK: no_robots_muon_lr3.0e-04_bs12 (log: sweep_logs/no_robots_muon_lr3.0e-04_bs12.log)
+[gpu 1] START no_robots_muon_lr5.0e-04_bs8
+[gpu 0] OK: no_robots_muon_lr3.0e-04_bs16 (log: sweep_logs/no_robots_muon_lr3.0e-04_bs16.log)
+[gpu 0] START no_robots_muon_lr5.0e-04_bs12
+[gpu 3] OK: no_robots_muon_lr3.0e-04_bs20 (log: sweep_logs/no_robots_muon_lr3.0e-04_bs20.log)
+[gpu 3] START no_robots_muon_lr5.0e-04_bs16
+[gpu 4] OK: no_robots_muon_lr5.0e-04_bs4 (log: sweep_logs/no_robots_muon_lr5.0e-04_bs4.log)
+[gpu 4] START no_robots_muon_lr5.0e-04_bs20
+[gpu 1] OK: no_robots_muon_lr5.0e-04_bs8 (log: sweep_logs/no_robots_muon_lr5.0e-04_bs8.log)
+[gpu 1] START no_robots_muon_lr7.5e-04_bs4
+[gpu 0] OK: no_robots_muon_lr5.0e-04_bs12 (log: sweep_logs/no_robots_muon_lr5.0e-04_bs12.log)
+[gpu 0] START no_robots_muon_lr7.5e-04_bs8
+[gpu 3] OK: no_robots_muon_lr5.0e-04_bs16 (log: sweep_logs/no_robots_muon_lr5.0e-04_bs16.log)
+[gpu 3] START no_robots_muon_lr7.5e-04_bs12
+[gpu 4] OK: no_robots_muon_lr5.0e-04_bs20 (log: sweep_logs/no_robots_muon_lr5.0e-04_bs20.log)
+[gpu 4] START no_robots_muon_lr7.5e-04_bs16
+[gpu 1] OK: no_robots_muon_lr7.5e-04_bs4 (log: sweep_logs/no_robots_muon_lr7.5e-04_bs4.log)
+[gpu 1] START no_robots_muon_lr7.5e-04_bs20
+[gpu 0] OK: no_robots_muon_lr7.5e-04_bs8 (log: sweep_logs/no_robots_muon_lr7.5e-04_bs8.log)
+[gpu 0] START no_robots_muon_lr1.0e-03_bs4
+[gpu 3] OK: no_robots_muon_lr7.5e-04_bs12 (log: sweep_logs/no_robots_muon_lr7.5e-04_bs12.log)
+[gpu 3] START no_robots_muon_lr1.0e-03_bs8
+[gpu 4] OK: no_robots_muon_lr7.5e-04_bs16 (log: sweep_logs/no_robots_muon_lr7.5e-04_bs16.log)
+[gpu 4] START no_robots_muon_lr1.0e-03_bs12
+[gpu 1] OK: no_robots_muon_lr7.5e-04_bs20 (log: sweep_logs/no_robots_muon_lr7.5e-04_bs20.log)
+[gpu 1] START no_robots_muon_lr1.0e-03_bs16
+[gpu 0] OK: no_robots_muon_lr1.0e-03_bs4 (log: sweep_logs/no_robots_muon_lr1.0e-03_bs4.log)
+[gpu 0] START no_robots_muon_lr1.0e-03_bs20
+[gpu 3] OK: no_robots_muon_lr1.0e-03_bs8 (log: sweep_logs/no_robots_muon_lr1.0e-03_bs8.log)
+[gpu 4] OK: no_robots_muon_lr1.0e-03_bs12 (log: sweep_logs/no_robots_muon_lr1.0e-03_bs12.log)
+[gpu 1] OK: no_robots_muon_lr1.0e-03_bs16 (log: sweep_logs/no_robots_muon_lr1.0e-03_bs16.log)
+[gpu 0] OK: no_robots_muon_lr1.0e-03_bs20 (log: sweep_logs/no_robots_muon_lr1.0e-03_bs20.log)
+
+=== SWEEP DONE: 65/65 succeeded ===

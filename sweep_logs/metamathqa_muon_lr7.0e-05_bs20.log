@@ -1,0 +1,7 @@
+Loading model Qwen/Qwen3-4B...
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 17138.06it/s]
+[W830 19:12:09.062474489 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 10720641024 bytes (free: 611909632, total: 101975851008).
+[W830 19:12:13.422089878 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 12446597120 bytes (free: 714670080, total: 101975851008).
+Model loaded.
+[step 25] train_loss=0.5466 eval_loss=0.4611 elapsed=372.4s
+[final] step=40 eval_loss=0.3824 elapsed=592.0s

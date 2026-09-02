@@ -1,0 +1,10 @@
+=== no_robots / muon / lr=7.0e-05 ===
+[step 25] train_loss=3.1362 eval_loss=2.8339 elapsed=74.8s
+[step 50] train_loss=2.5593 eval_loss=2.4104 elapsed=149.1s
+[step 75] train_loss=2.2574 eval_loss=2.1873 elapsed=226.0s
+[step 100] train_loss=2.1192 eval_loss=2.0567 elapsed=301.8s
+[step 125] train_loss=1.9848 eval_loss=1.9968 elapsed=377.2s
+[step 150] train_loss=1.9621 eval_loss=1.9786 elapsed=452.9s
+[step 175] train_loss=1.9874 eval_loss=1.9677 elapsed=526.1s
+[step 200] train_loss=1.9731 eval_loss=1.9617 elapsed=599.6s
+[final] step=200 eval_loss=1.9617 elapsed=601.7s

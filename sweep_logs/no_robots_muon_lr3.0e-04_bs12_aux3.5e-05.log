@@ -1,0 +1,23 @@
+Loading model Qwen/Qwen3-4B...
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 13017.87it/s]
+[W902 12:46:44.843926254 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 7467958272 bytes (free: 291635200, total: 101975851008).
+[W902 12:46:44.873346661 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 7467958272 bytes (free: 6547439616, total: 101975851008).
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/gbagai/Full_Fine_Tuning_4datasets/Experiments/run.py", line 81, in <module>
+    main()
+  File "/home/gbagai/Full_Fine_Tuning_4datasets/Experiments/run.py", line 63, in main
+    train(
+  File "/home/gbagai/Full_Fine_Tuning_4datasets/src/training/trainer.py", line 179, in train
+    loss.backward()
+  File "/home/gbagai/Full_Fine_Tuning_4datasets/.venv/lib/python3.12/site-packages/torch/_tensor.py", line 623, in backward
+    torch.autograd.backward(
+  File "/home/gbagai/Full_Fine_Tuning_4datasets/.venv/lib/python3.12/site-packages/torch/autograd/__init__.py", line 395, in backward
+    _engine_run_backward(
+  File "/home/gbagai/Full_Fine_Tuning_4datasets/.venv/lib/python3.12/site-packages/torch/autograd/graph.py", line 979, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 6.96 GiB. GPU 0 has a total capacity of 94.97 GiB of which 6.10 GiB is free. Process 324859 has 39.72 GiB memory in use. Including non-PyTorch memory, this process has 49.14 GiB memory in use. Of the allocated memory 43.10 GiB is allocated by PyTorch, and 5.36 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+Model loaded.
+'no_robots': dropped 44/6400 train and 2/100 test examples with no unmasked label tokens (prompt alone reached max_length=1024).

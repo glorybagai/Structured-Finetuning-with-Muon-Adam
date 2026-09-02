@@ -1,0 +1,10 @@
+=== metamathqa / muon / lr=2.0e-05 ===
+[step 25] train_loss=0.6465 eval_loss=0.6387 elapsed=59.6s
+[step 50] train_loss=0.6097 eval_loss=0.5966 elapsed=118.4s
+[step 75] train_loss=0.5658 eval_loss=0.5600 elapsed=178.1s
+[step 100] train_loss=0.5358 eval_loss=0.5285 elapsed=238.1s
+[step 125] train_loss=0.5031 eval_loss=0.5000 elapsed=298.7s
+[step 150] train_loss=0.4776 eval_loss=0.4743 elapsed=357.5s
+[step 175] train_loss=0.4578 eval_loss=0.4501 elapsed=415.8s
+[step 200] train_loss=0.4274 eval_loss=0.4281 elapsed=475.8s
+[final] step=200 eval_loss=0.4281 elapsed=477.1s

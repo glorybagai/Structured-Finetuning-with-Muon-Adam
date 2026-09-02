@@ -1,0 +1,10 @@
+=== metamathqa / adam / lr=3.5e-05 ===
+[step 25] train_loss=0.2330 eval_loss=0.1961 elapsed=44.7s
+[step 50] train_loss=0.1829 eval_loss=0.1910 elapsed=87.6s
+[step 75] train_loss=0.1832 eval_loss=0.1855 elapsed=131.7s
+[step 100] train_loss=0.1748 eval_loss=0.1844 elapsed=174.7s
+[step 125] train_loss=0.1690 eval_loss=0.1821 elapsed=217.1s
+[step 150] train_loss=0.1671 eval_loss=0.1827 elapsed=264.4s
+[step 175] train_loss=0.1721 eval_loss=0.1804 elapsed=306.1s
+[step 200] train_loss=0.1695 eval_loss=0.1782 elapsed=350.6s
+[final] step=200 eval_loss=0.1782 elapsed=352.0s

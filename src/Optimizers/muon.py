@@ -53,7 +53,7 @@ class CombinedOptimizer:
 
 def build_muon_optimizer(model, lr, weight_decay=0.1, momentum=0.95, nesterov=True,
                           ns_steps=5, adjust_lr_fn=None,
-                          adamw_lr=None, adamw_betas=(0.9, 0.95), adamw_weight_decay=0.01):
+                          adamw_lr=3.5e-5, adamw_betas=(0.9, 0.999), adamw_weight_decay=0.01):
     """
     Splits model.named_parameters() into:
       - muon_params:  strictly 2D, excluding embedding / lm_head weights

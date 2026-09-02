@@ -1,10 +1,24 @@
-=== no_robots / muon / lr=5.0e-04 ===
-[step 25] train_loss=2.3680 eval_loss=2.2532 elapsed=74.4s
-[step 50] train_loss=2.2097 eval_loss=2.1379 elapsed=151.3s
-[step 75] train_loss=2.1156 eval_loss=2.1341 elapsed=227.9s
-[step 100] train_loss=2.1756 eval_loss=2.1327 elapsed=302.2s
-[step 125] train_loss=2.1658 eval_loss=2.1225 elapsed=377.5s
-[step 150] train_loss=2.1648 eval_loss=2.1210 elapsed=453.9s
-[step 175] train_loss=2.1583 eval_loss=2.1321 elapsed=525.7s
-[step 200] train_loss=2.1847 eval_loss=2.1345 elapsed=598.0s
-[final] step=200 eval_loss=2.1345 elapsed=600.0s
+=== no_robots / muon / lr=5.0e-04 / batch_size=4 ===
+[step 25] train_loss=2.2960 eval_loss=1.9580 elapsed=84.6s
+[step 50] train_loss=1.9492 eval_loss=1.9187 elapsed=168.8s
+=== no_robots / muon / lr=5.0e-04 / batch_size=8 ===
+[step 75] train_loss=1.9329 eval_loss=1.9121 elapsed=253.8s
+[step 100] train_loss=1.9024 eval_loss=1.9084 elapsed=340.3s
+[step 25] train_loss=2.2920 eval_loss=1.9740 elapsed=167.9s
+[step 125] train_loss=1.8694 eval_loss=1.9009 elapsed=429.5s
+[step 150] train_loss=1.8806 eval_loss=1.8986 elapsed=513.5s
+[step 50] train_loss=1.9367 eval_loss=1.9365 elapsed=336.9s
+=== no_robots / muon / lr=5.0e-04 / batch_size=12 ===
+[step 175] train_loss=1.8983 eval_loss=1.8984 elapsed=598.0s
+=== no_robots / muon / lr=5.0e-04 / batch_size=16 ===
+[final] step=198 eval_loss=1.8985 elapsed=676.9s
+=== no_robots / muon / lr=5.0e-04 / batch_size=20 ===
+[step 75] train_loss=1.9269 eval_loss=1.9272 elapsed=510.8s
+[step 25] train_loss=2.2488 eval_loss=1.9831 elapsed=287.3s
+[final] step=99 eval_loss=1.9222 elapsed=677.4s
+[step 25] train_loss=2.2604 eval_loss=2.0072 elapsed=390.0s
+[step 50] train_loss=1.9876 eval_loss=1.9447 elapsed=567.6s
+[step 25] train_loss=2.2665 eval_loss=1.9315 elapsed=524.9s
+[final] step=66 eval_loss=1.9361 elapsed=755.2s
+[final] step=49 eval_loss=1.9737 elapsed=777.2s
+[final] step=39 eval_loss=1.9067 elapsed=829.7s

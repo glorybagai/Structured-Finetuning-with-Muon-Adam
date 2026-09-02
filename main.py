@@ -1,33 +1,31 @@
 """
 Sweep launcher for the full-fine-tuning LR grid across datasets/optimizers.
-Run this from Full_Fine_Tuning/ (one level above Experiments/):
+Run this from Full_Fine_Tuning_4datasets/:
 
-    python sweep.py --datasets no_robots astrophysics                  # auto-detect ALL free GPUs
-    python sweep.py --datasets no_robots astrophysics --n_gpus 4       # auto-detect, use up to 4 free GPUs
-    python sweep.py --datasets no_robots --optimizers adam --n_gpus 1
-    python sweep.py --datasets no_robots astrophysics --n_gpus 4 --dry_run
+    python main.py --datasets no_robots --n_gpus 6
+    python main.py --experiment aux_bs_scaling --datasets no_robots --n_gpus 6
+    python main.py --experiment aux_fine --datasets no_robots --n_gpus 6
+    python main.py --experiment bs_transfer_fixed --datasets no_robots --n_gpus 6
+    python main.py --datasets no_robots --dry_run
 
-Each (dataset, optimizer, lr) combination is one
-`python -m Experiments.run ...` subprocess. Jobs are pulled from a shared
-queue by however many GPU workers were resolved, each pinned to one
-physical GPU via CUDA_VISIBLE_DEVICES for the duration of its job, so no two
-jobs ever land on the same GPU at once.
-Per-run stdout/stderr goes to sweep_logs/<run_name>.log so a failed run
-doesn't get lost in interleaved terminal output.
+--experiment selects which job grid gets built:
+  standard          -- original dataset x optimizer x lr (x batch_size for muon) grid
+  aux_bs_scaling    -- muon_lr fixed at its own best-per-batch-size value; aux_lr swept
+                       around a sqrt-scaling prediction, per batch size
+  aux_fine          -- fine-grained aux_lr sweep at the single reference point
+                       (batch_size=4, muon_lr=3e-4)
+  bs_transfer_fixed -- batch_size swept with BOTH muon_lr and aux_lr pinned at the
+                       single reference values, no retuning at all -- baseline for
+                       how much retuning actually buys you
 
-Anything after --extra_args is passed straight through to Experiments.run, e.g.:
-    python sweep.py --datasets no_robots --n_gpus 4 --extra_args --batch_size 8 --n_train 3200
+GPU SELECTION:
+  - Default: auto-detects every GPU under the memory threshold.
+  - --n_gpus N: auto-detects, uses the first N free ones.
+  - --gpu_ids: pins to exactly the ids given, no auto-detection.
 
-GPU SELECTION (on a shared node, which physical GPUs are free changes over
-time -- other people's jobs come and go):
-  - Default (no --gpu_ids, no --n_gpus): auto-detects every GPU currently
-    under the memory threshold via `nvidia-smi` and uses all of them.
-  - --n_gpus N (no --gpu_ids): auto-detects free GPUs the same way, then
-    uses the first N of them. Does NOT assume ids 0..N-1 are free.
-  - --gpu_ids: pins to exactly the physical GPU ids given, no auto-detection
-    at all -- use this if you want to force specific GPUs regardless of what
-    nvidia-smi reports free, e.g.:
-        python sweep.py --datasets no_robots --gpu_ids 3 4 5
+NOTE: GPU auto-detection runs ONCE at sweep start -- if a GPU that was free
+becomes busy partway through, jobs already queued to that worker slot will
+still be dispatched there and may OOM.
 """
 
 import argparse
@@ -45,17 +43,28 @@ OPTIMIZER_LRS = {
     "muon": MUON_LRS,
 }
 
-# A GPU with less than this much memory used is considered "free". 1000 MiB
-# gives headroom above driver/idle overhead (e.g. the 0-3MiB seen on truly
-# idle GPUs) without being so low that a lightly-used GPU slips through.
+MUON_BATCH_SIZES = [4, 8, 12, 16, 20]
+ADAM_FIXED_BATCH_SIZE = 4
+
+REFERENCE_MUON_LR = 3e-4
+REFERENCE_AUX_LR = 3.5e-5
+
+BEST_MUON_LR_PER_BATCH = {4: 3e-4, 8: 5e-4, 12: 5e-4, 16: 7.5e-4, 20: 7.5e-4}
+
+AUX_LR_GRID_PER_BATCH = {
+    4:  [1.5e-5, 2e-5, 2.5e-5, 3.5e-5, 5e-5],
+    8:  [2.5e-5, 3.5e-5, 5e-5, 7e-5, 1e-4],
+    12: [3.5e-5, 5e-5, 7e-5, 1e-4, 1.5e-4],
+    16: [3.5e-5, 5e-5, 7e-5, 1e-4, 1.5e-4],
+    20: [3.5e-5, 5e-5, 7.5e-5, 1e-4, 1.5e-4, 2e-4],
+}
+
+AUX_LR_FINE_GRID = [1.5e-5, 2e-5, 2.5e-5, 3e-5, 3.5e-5, 4e-5, 4.5e-5, 5e-5, 6e-5]
+
 DEFAULT_FREE_MEM_THRESHOLD_MIB = 1000
 
 
 def get_free_gpu_ids(threshold_mib=DEFAULT_FREE_MEM_THRESHOLD_MIB):
-    """Queries nvidia-smi for GPUs with less than threshold_mib memory used.
-    Returns their physical indices, in ascending order. Falls back to [0]
-    with a warning if nvidia-smi can't be queried at all (e.g. no GPU driver
-    visible in this environment)."""
     try:
         output = subprocess.check_output(
             ["nvidia-smi", "--query-gpu=index,memory.used", "--format=csv,noheader,nounits"],
@@ -75,8 +84,6 @@ def get_free_gpu_ids(threshold_mib=DEFAULT_FREE_MEM_THRESHOLD_MIB):
 
 
 def resolve_gpu_ids(args):
-    """Priority: explicit --gpu_ids > auto-detected free GPUs (capped at
-    --n_gpus if given) > error if nothing free."""
     if args.gpu_ids:
         return args.gpu_ids
 
@@ -100,72 +107,119 @@ def resolve_gpu_ids(args):
     return gpu_ids
 
 
-def build_jobs(datasets, optimizers):
+def build_jobs_standard(datasets, optimizers):
     jobs = []
     for dataset in datasets:
-        for optimizer in optimizers:
-            for lr in OPTIMIZER_LRS[optimizer]:
-                jobs.append({"dataset": dataset, "optimizer": optimizer, "lr": lr})
+        if "adam" in optimizers:
+            for lr in OPTIMIZER_LRS["adam"]:
+                jobs.append({"dataset": dataset, "optimizer": "adam", "lr": lr,
+                             "batch_size": ADAM_FIXED_BATCH_SIZE, "aux_lr": None})
+        if "muon" in optimizers:
+            for lr in OPTIMIZER_LRS["muon"]:
+                for bs in MUON_BATCH_SIZES:
+                    jobs.append({"dataset": dataset, "optimizer": "muon", "lr": lr,
+                                 "batch_size": bs, "aux_lr": None})
     return jobs
 
 
+def build_jobs_aux_bs_scaling(datasets):
+    jobs = []
+    for dataset in datasets:
+        for bs, muon_lr in BEST_MUON_LR_PER_BATCH.items():
+            for aux_lr in AUX_LR_GRID_PER_BATCH[bs]:
+                jobs.append({"dataset": dataset, "optimizer": "muon", "lr": muon_lr,
+                             "batch_size": bs, "aux_lr": aux_lr})
+    return jobs
+
+
+def build_jobs_aux_fine(datasets):
+    jobs = []
+    for dataset in datasets:
+        for aux_lr in AUX_LR_FINE_GRID:
+            jobs.append({"dataset": dataset, "optimizer": "muon", "lr": REFERENCE_MUON_LR,
+                         "batch_size": 4, "aux_lr": aux_lr})
+    return jobs
+
+
+def build_jobs_bs_transfer_fixed(datasets):
+    jobs = []
+    for dataset in datasets:
+        for bs in MUON_BATCH_SIZES:
+            jobs.append({"dataset": dataset, "optimizer": "muon", "lr": REFERENCE_MUON_LR,
+                         "batch_size": bs, "aux_lr": REFERENCE_AUX_LR})
+    return jobs
+
+
+EXPERIMENT_BUILDERS = {
+    "aux_bs_scaling": build_jobs_aux_bs_scaling,
+    "aux_fine": build_jobs_aux_fine,
+    "bs_transfer_fixed": build_jobs_bs_transfer_fixed,
+}
+
+
 def run_job(job, gpu_id, extra_args, log_dir, dry_run):
-    dataset, optimizer, lr = job["dataset"], job["optimizer"], job["lr"]
-    run_name = f"{dataset}_{optimizer}_lr{lr:.1e}"
-    log_path = os.path.join(log_dir, f"{run_name}.log")
+    dataset, optimizer, lr, batch_size = job["dataset"], job["optimizer"], job["lr"], job["batch_size"]
+    aux_lr = job.get("aux_lr")
+
+    tag = f"{dataset}_{optimizer}_lr{lr:.1e}_bs{batch_size}"
+    if aux_lr is not None:
+        tag += f"_aux{aux_lr:.1e}"
+    log_path = os.path.join(log_dir, f"{tag}.log")
 
     cmd = [
         sys.executable, "-m", "Experiments.run",
         "--dataset", dataset,
         "--optimizer", optimizer,
         "--lr", str(lr),
-    ] + extra_args
+        "--batch_size", str(batch_size),
+        "--gradient_checkpointing",
+    ]
+    if aux_lr is not None:
+        cmd += ["--adamw_lr", str(aux_lr)]
+    cmd += extra_args
 
     if dry_run:
         print(f"[gpu {gpu_id}] DRY RUN: {' '.join(cmd)}")
-        return run_name, 0
+        return tag, 0
 
     env = os.environ.copy()
     env["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
 
-    print(f"[gpu {gpu_id}] START {run_name}")
+    print(f"[gpu {gpu_id}] START {tag}")
     with open(log_path, "w") as f:
         result = subprocess.run(cmd, env=env, stdout=f, stderr=subprocess.STDOUT)
 
     status = "OK" if result.returncode == 0 else f"FAILED (exit {result.returncode})"
-    print(f"[gpu {gpu_id}] {status}: {run_name} (log: {log_path})")
-    return run_name, result.returncode
+    print(f"[gpu {gpu_id}] {status}: {tag} (log: {log_path})")
+    return tag, result.returncode
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--datasets", nargs="+", required=True,
-                         help="Dataset keys from DATASET_CONFIGS in data_utils.py, e.g. no_robots astrophysics")
-    parser.add_argument("--optimizers", nargs="+", default=["adam", "muon"], choices=["adam", "muon"])
-    parser.add_argument("--n_gpus", type=int, default=None,
-                         help="How many auto-detected free GPUs to use. Omit to use ALL free GPUs found. "
-                              "Ignored if --gpu_ids is given.")
-    parser.add_argument("--gpu_ids", type=int, nargs="+", default=None,
-                         help="Explicit physical GPU ids to use, e.g. --gpu_ids 3 4 5. "
-                              "Overrides auto-detection entirely -- use this to force specific "
-                              "GPUs regardless of what nvidia-smi currently reports as free.")
-    parser.add_argument("--gpu_mem_threshold", type=int, default=DEFAULT_FREE_MEM_THRESHOLD_MIB,
-                         help=f"MiB of memory used below which a GPU is considered free for "
-                              f"auto-detection (default {DEFAULT_FREE_MEM_THRESHOLD_MIB}). Ignored if --gpu_ids is given.")
+    parser.add_argument("--experiment", type=str, default="standard",
+                         choices=["standard"] + list(EXPERIMENT_BUILDERS.keys()))
+    parser.add_argument("--datasets", nargs="+", required=True)
+    parser.add_argument("--optimizers", nargs="+", default=["adam", "muon"], choices=["adam", "muon"],
+                         help="Only used for --experiment standard.")
+    parser.add_argument("--n_gpus", type=int, default=None)
+    parser.add_argument("--gpu_ids", type=int, nargs="+", default=None)
+    parser.add_argument("--gpu_mem_threshold", type=int, default=DEFAULT_FREE_MEM_THRESHOLD_MIB)
     parser.add_argument("--log_dir", type=str, default="sweep_logs")
-    parser.add_argument("--dry_run", action="store_true", help="Print the commands without running them")
-    parser.add_argument("--extra_args", nargs=argparse.REMAINDER, default=[],
-                         help="Everything after this flag is forwarded to run.py as-is")
+    parser.add_argument("--dry_run", action="store_true")
+    parser.add_argument("--extra_args", nargs=argparse.REMAINDER, default=[])
     args = parser.parse_args()
 
     os.makedirs(args.log_dir, exist_ok=True)
-    jobs = build_jobs(args.datasets, args.optimizers)
-    gpu_ids = resolve_gpu_ids(args)
-    print(f"Queued {len(jobs)} runs ({args.datasets} x {args.optimizers}) across GPUs {gpu_ids}")
 
-    # A queue of free GPU ids: each worker claims one before running a job and
-    # returns it after, so exactly len(gpu_ids) jobs are ever in flight at once
-    # and two jobs never share a physical GPU.
+    if args.experiment == "standard":
+        jobs = build_jobs_standard(args.datasets, args.optimizers)
+    else:
+        jobs = EXPERIMENT_BUILDERS[args.experiment](args.datasets)
+
+    gpu_ids = resolve_gpu_ids(args)
+    print(f"Experiment: {args.experiment}")
+    print(f"Queued {len(jobs)} runs across GPUs {gpu_ids}")
+
     gpu_queue = queue.Queue()
     for gid in gpu_ids:
         gpu_queue.put(gid)
@@ -181,7 +235,7 @@ def main():
         results = list(executor.map(worker, jobs))
 
     failed = [r for r in results if r[1] != 0]
-    print(f"\n=== SWEEP DONE: {len(results) - len(failed)}/{len(results)} succeeded ===")
+    print(f"\n=== SWEEP DONE ({args.experiment}): {len(results) - len(failed)}/{len(results)} succeeded ===")
     if failed:
         print("Failed runs:")
         for name, code in failed:

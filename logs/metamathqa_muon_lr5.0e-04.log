@@ -1,10 +1,27 @@
-=== metamathqa / muon / lr=5.0e-04 ===
-[step 25] train_loss=0.2808 eval_loss=0.2317 elapsed=60.5s
-[step 50] train_loss=0.2158 eval_loss=0.2246 elapsed=121.6s
-[step 75] train_loss=0.2117 eval_loss=0.2218 elapsed=180.1s
-[step 100] train_loss=0.2088 eval_loss=0.2169 elapsed=238.8s
-[step 125] train_loss=0.2013 eval_loss=0.2157 elapsed=297.7s
-[step 150] train_loss=0.2016 eval_loss=0.2108 elapsed=357.5s
-[step 175] train_loss=0.1994 eval_loss=0.2098 elapsed=417.7s
-[step 200] train_loss=0.1964 eval_loss=0.2154 elapsed=476.6s
-[final] step=200 eval_loss=0.2154 elapsed=477.9s
+=== metamathqa / muon / lr=5.0e-04 / batch_size=4 ===
+[step 25] train_loss=0.3040 eval_loss=0.1965 elapsed=69.0s
+=== metamathqa / muon / lr=5.0e-04 / batch_size=8 ===
+[step 50] train_loss=0.1835 eval_loss=0.1849 elapsed=136.3s
+[step 75] train_loss=0.1714 eval_loss=0.1841 elapsed=205.9s
+=== metamathqa / muon / lr=5.0e-04 / batch_size=12 ===
+[step 25] train_loss=0.2916 eval_loss=0.1869 elapsed=125.7s
+[step 100] train_loss=0.1699 eval_loss=0.1809 elapsed=274.1s
+[step 125] train_loss=0.1717 eval_loss=0.1797 elapsed=343.1s
+[step 50] train_loss=0.1716 eval_loss=0.1760 elapsed=253.5s
+=== metamathqa / muon / lr=5.0e-04 / batch_size=16 ===
+[step 25] train_loss=0.2849 eval_loss=0.1826 elapsed=206.1s
+[step 150] train_loss=0.1690 eval_loss=0.1781 elapsed=414.0s
+[step 175] train_loss=0.1684 eval_loss=0.1807 elapsed=484.9s
+[step 75] train_loss=0.1695 eval_loss=0.1705 elapsed=380.4s
+[step 200] train_loss=0.1660 eval_loss=0.1767 elapsed=555.0s
+[final] step=200 eval_loss=0.1767 elapsed=556.4s
+=== metamathqa / muon / lr=5.0e-04 / batch_size=20 ===
+[step 50] train_loss=0.1706 eval_loss=0.1721 elapsed=407.7s
+[step 100] train_loss=0.1657 eval_loss=0.1670 elapsed=512.9s
+[final] step=100 eval_loss=0.1670 elapsed=514.3s
+[step 25] train_loss=0.2832 eval_loss=0.1825 elapsed=280.9s
+[final] step=66 eval_loss=0.1671 elapsed=543.3s
+[step 25] train_loss=0.2827 eval_loss=0.1828 elapsed=382.0s
+[step 50] train_loss=0.1702 eval_loss=0.1691 elapsed=560.9s
+[final] step=50 eval_loss=0.1691 elapsed=562.6s
+[final] step=40 eval_loss=0.1728 elapsed=596.3s

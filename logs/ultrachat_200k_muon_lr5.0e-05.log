@@ -1,0 +1,20 @@
+=== ultrachat_200k / muon / lr=5.0e-05 / batch_size=4 ===
+=== ultrachat_200k / muon / lr=5.0e-05 / batch_size=8 ===
+[step 25] train_loss=1.8683 eval_loss=1.7441 elapsed=161.9s
+=== ultrachat_200k / muon / lr=5.0e-05 / batch_size=12 ===
+[step 50] train_loss=1.5768 eval_loss=1.4796 elapsed=323.7s
+[step 25] train_loss=1.8309 eval_loss=1.7233 elapsed=301.4s
+[step 75] train_loss=1.3917 eval_loss=1.2858 elapsed=484.1s
+=== ultrachat_200k / muon / lr=5.0e-05 / batch_size=16 ===
+[step 100] train_loss=1.2025 eval_loss=1.1818 elapsed=645.6s
+[step 25] train_loss=1.8352 eval_loss=1.7139 elapsed=472.8s
+[step 50] train_loss=1.5547 eval_loss=1.4593 elapsed=602.3s
+[step 125] train_loss=1.1045 eval_loss=1.1132 elapsed=806.2s
+[final] step=132 eval_loss=1.0996 elapsed=854.6s
+=== ultrachat_200k / muon / lr=5.0e-05 / batch_size=20 ===
+[final] step=66 eval_loss=1.3325 elapsed=796.6s
+[final] step=44 eval_loss=1.5074 elapsed=833.5s
+[step 25] train_loss=1.8215 eval_loss=1.7032 elapsed=597.8s
+[final] step=33 eval_loss=1.6083 elapsed=792.0s
+[step 25] train_loss=1.8191 eval_loss=1.7264 elapsed=744.2s
+[final] step=26 eval_loss=1.7149 elapsed=789.4s

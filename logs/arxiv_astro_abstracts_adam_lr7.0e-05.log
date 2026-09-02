@@ -1,10 +1,10 @@
-=== arxiv_astro_abstracts / adam / lr=7.0e-05 ===
-[step 25] train_loss=2.4740 eval_loss=2.3530 elapsed=44.5s
-[step 50] train_loss=2.3271 eval_loss=2.3266 elapsed=89.5s
-[step 75] train_loss=2.3660 eval_loss=2.3078 elapsed=133.1s
-[step 100] train_loss=2.3098 eval_loss=2.3011 elapsed=178.8s
-[step 125] train_loss=2.3106 eval_loss=2.2989 elapsed=222.2s
-[step 150] train_loss=2.3198 eval_loss=2.2941 elapsed=266.4s
-[step 175] train_loss=2.3211 eval_loss=2.2855 elapsed=310.4s
-[step 200] train_loss=2.2873 eval_loss=2.2823 elapsed=355.7s
-[final] step=200 eval_loss=2.2823 elapsed=357.1s
+=== arxiv_astro_abstracts / adam / lr=7.0e-05 / batch_size=4 ===
+[step 25] train_loss=2.4852 eval_loss=2.3609 elapsed=55.1s
+[step 50] train_loss=2.3854 eval_loss=2.3307 elapsed=109.4s
+[step 75] train_loss=2.3384 eval_loss=2.3133 elapsed=163.9s
+[step 100] train_loss=2.3041 eval_loss=2.3044 elapsed=219.1s
+[step 125] train_loss=2.2721 eval_loss=2.3013 elapsed=273.7s
+[step 150] train_loss=2.3185 eval_loss=2.2909 elapsed=327.8s
+[step 175] train_loss=2.3170 eval_loss=2.2897 elapsed=382.6s
+[step 200] train_loss=2.2909 eval_loss=2.2803 elapsed=437.7s
+[final] step=200 eval_loss=2.2803 elapsed=439.1s

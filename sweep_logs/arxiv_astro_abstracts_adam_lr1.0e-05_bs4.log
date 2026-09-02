@@ -1,0 +1,14 @@
+Loading model Qwen/Qwen3-4B...
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 18370.36it/s]
+Model loaded.
+NOTE: 'arxiv_astro_abstracts' is a gated dataset — make sure you've accepted its terms on the HF hub and are logged in (or pass a token).
+Filter:   0%|          | 0/6400 [00:00<?, ? examples/s]Filter:  16%|█▌        | 1000/6400 [00:00<00:00, 7383.31 examples/s]Filter:  31%|███▏      | 2000/6400 [00:00<00:00, 7351.11 examples/s]Filter:  47%|████▋     | 3000/6400 [00:00<00:00, 7478.87 examples/s]Filter:  62%|██████▎   | 4000/6400 [00:00<00:00, 7483.62 examples/s]Filter:  78%|███████▊  | 5000/6400 [00:00<00:00, 7546.44 examples/s]Filter:  94%|█████████▍| 6000/6400 [00:00<00:00, 7452.99 examples/s]Filter: 100%|██████████| 6400/6400 [00:00<00:00, 7460.22 examples/s]
+[step 25] train_loss=2.4241 eval_loss=2.3074 elapsed=54.5s
+[step 50] train_loss=2.2810 eval_loss=2.2631 elapsed=110.8s
+[step 75] train_loss=2.2715 eval_loss=2.2500 elapsed=164.9s
+[step 100] train_loss=2.2315 eval_loss=2.2416 elapsed=219.5s
+[step 125] train_loss=2.2441 eval_loss=2.2358 elapsed=275.4s
+[step 150] train_loss=2.2389 eval_loss=2.2313 elapsed=330.0s
+[step 175] train_loss=2.2559 eval_loss=2.2274 elapsed=384.7s
+[step 200] train_loss=2.2468 eval_loss=2.2245 elapsed=438.2s
+[final] step=200 eval_loss=2.2245 elapsed=439.7s

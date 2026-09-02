@@ -4,7 +4,7 @@ Training loop. Called from Experiments/run.py as:
     train(
         model=..., tokenizer=..., optimizer=..., train_ds=..., test_ds=...,
         device=..., dataset_name=..., optimizer_name=..., lr=...,
-        batch_size=..., gradient_accumulation_steps=..., eval_every_n_steps=...,
+        batch_size=..., aux_lr=..., gradient_accumulation_steps=..., eval_every_n_steps=...,
     )
 
 train_ds/test_ds come from build_datasets() in data_loader.py: each example
@@ -17,7 +17,13 @@ Results and logs are split two ways:
   - results/{dataset_name}_results.csv -- one row per eval (train + eval),
     plus a final row at end of training. One CSV per dataset (not shared
     across no_robots / arxiv_astro_abstracts) so downstream analysis
-    doesn't need to filter by dataset_name first.
+    doesn't need to filter by dataset_name first. Rows are further keyed by
+    optimizer_name, lr, batch_size, AND aux_lr, since a single dataset's
+    CSV now accumulates runs that vary all four (e.g. the batch-size sweep
+    and the aux_lr sweeps) -- without these as their own columns, rows from
+    different configs at the same (optimizer, lr) would be indistinguishable
+    from each other. aux_lr is None/blank for adam runs (adam has no aux
+    parameter group -- it's a single optimizer over everything).
 
   - logs/{dataset_name}_{optimizer_name}_lr{lr}.log -- a dedicated,
     human-readable training curve for that single run (same lines that get
@@ -41,7 +47,7 @@ os.makedirs(RESULTS_DIR, exist_ok=True)
 os.makedirs(LOGS_DIR, exist_ok=True)
 
 RESULTS_FIELDS = [
-    "optimizer_name", "lr", "step", "split",
+    "optimizer_name", "lr", "batch_size", "aux_lr", "step", "split",
     "loss", "perplexity", "elapsed_seconds",
 ]
 
@@ -123,6 +129,7 @@ def train(
     optimizer_name,
     lr,
     batch_size=4,
+    aux_lr=None,
     gradient_accumulation_steps=8,
     eval_every_n_steps=25,
 ):
@@ -137,7 +144,11 @@ def train(
     test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False, collate_fn=collate_fn)
 
     run_log_path = get_run_log_path(dataset_name, optimizer_name, lr)
-    append_run_log(run_log_path, f"=== {dataset_name} / {optimizer_name} / lr={lr:.1e} ===")
+    append_run_log(
+        run_log_path,
+        f"=== {dataset_name} / {optimizer_name} / lr={lr:.1e} / batch_size={batch_size} "
+        f"/ aux_lr={aux_lr if aux_lr is not None else 'n/a'} ===",
+    )
 
     model.train()
     start_time = time.time()
@@ -188,13 +199,15 @@ def train(
 
                 append_result(dataset_name, {
                     "optimizer_name": optimizer_name,
-                    "lr": lr, "step": step, "split": "train",
+                    "lr": lr, "batch_size": batch_size, "aux_lr": aux_lr,
+                    "step": step, "split": "train",
                     "loss": train_loss, "perplexity": float(torch.exp(torch.tensor(train_loss))),
                     "elapsed_seconds": elapsed,
                 })
                 append_result(dataset_name, {
                     "optimizer_name": optimizer_name,
-                    "lr": lr, "step": step, "split": "eval",
+                    "lr": lr, "batch_size": batch_size, "aux_lr": aux_lr,
+                    "step": step, "split": "eval",
                     "loss": eval_loss, "perplexity": float(torch.exp(torch.tensor(eval_loss))),
                     "elapsed_seconds": elapsed,
                 })
@@ -211,7 +224,8 @@ def train(
 
     append_result(dataset_name, {
         "optimizer_name": optimizer_name,
-        "lr": lr, "step": step, "split": "final_eval",
+        "lr": lr, "batch_size": batch_size, "aux_lr": aux_lr,
+        "step": step, "split": "final_eval",
         "loss": final_eval_loss, "perplexity": float(torch.exp(torch.tensor(final_eval_loss))),
         "elapsed_seconds": elapsed,
     })

@@ -35,11 +35,16 @@ def main():
     parser.add_argument("--momentum", type=float, default=0.95, help="Muon momentum (ignored for adam)")
     parser.add_argument("--adjust_lr_fn", type=str, default=None, choices=[None, "original", "match_rms_adamw"],
                          help="Muon LR adjustment (torch.optim.Muon arg, ignored for adam)")
-    parser.add_argument("--adamw_lr", type=float, default=None,
-                         help="LR for the AdamW fallback params under Muon (embeddings/head/norms). Defaults to --lr.")
+    parser.add_argument("--adamw_lr", type=float, default=3.5e-5,
+                         help="LR for the AdamW fallback params under Muon (embeddings/head/norms). "
+                              "Defaults to the value tuned on no_robots FFT; pass explicitly to override.")
+    parser.add_argument("--gradient_checkpointing", action="store_true",
+                         help="Enable to reduce activation memory at larger batch sizes.")
     args = parser.parse_args()
 
-    model, tokenizer, device = load_model_and_tokenizer(args.model_name)
+    model, tokenizer, device = load_model_and_tokenizer(
+        args.model_name, gradient_checkpointing=args.gradient_checkpointing
+    )
 
     train_ds, test_ds = build_datasets(
         args.dataset, tokenizer,
@@ -66,6 +71,7 @@ def main():
         optimizer_name=args.optimizer,
         lr=args.lr,
         batch_size=args.batch_size,
+        aux_lr=args.adamw_lr if args.optimizer == "muon" else None,
         gradient_accumulation_steps=args.gradient_accumulation_steps,
         eval_every_n_steps=args.eval_every_n_steps,
     )

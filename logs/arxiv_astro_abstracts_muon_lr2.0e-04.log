@@ -1,10 +1,27 @@
-=== arxiv_astro_abstracts / muon / lr=2.0e-04 ===
-[step 25] train_loss=2.5237 eval_loss=2.4091 elapsed=60.9s
-[step 50] train_loss=2.4176 eval_loss=2.3537 elapsed=120.2s
-[step 75] train_loss=2.3563 eval_loss=2.3157 elapsed=180.4s
-[step 100] train_loss=2.3289 eval_loss=2.2916 elapsed=240.5s
-[step 125] train_loss=2.3251 eval_loss=2.2819 elapsed=300.4s
-[step 150] train_loss=2.2773 eval_loss=2.2727 elapsed=361.0s
-[step 175] train_loss=2.2681 eval_loss=2.2606 elapsed=420.7s
-[step 200] train_loss=2.2662 eval_loss=2.2559 elapsed=481.7s
-[final] step=200 eval_loss=2.2559 elapsed=483.1s
+=== arxiv_astro_abstracts / muon / lr=2.0e-04 / batch_size=4 ===
+=== arxiv_astro_abstracts / muon / lr=2.0e-04 / batch_size=8 ===
+[step 25] train_loss=2.4815 eval_loss=2.3824 elapsed=70.2s
+[step 50] train_loss=2.3754 eval_loss=2.3177 elapsed=141.3s
+[step 25] train_loss=2.4735 eval_loss=2.3637 elapsed=121.6s
+=== arxiv_astro_abstracts / muon / lr=2.0e-04 / batch_size=12 ===
+[step 75] train_loss=2.3007 eval_loss=2.2659 elapsed=210.7s
+=== arxiv_astro_abstracts / muon / lr=2.0e-04 / batch_size=16 ===
+[step 100] train_loss=2.2591 eval_loss=2.2464 elapsed=281.1s
+[step 50] train_loss=2.3617 eval_loss=2.2976 elapsed=240.4s
+[step 125] train_loss=2.2472 eval_loss=2.2335 elapsed=351.6s
+[step 25] train_loss=2.4717 eval_loss=2.3570 elapsed=182.8s
+[step 150] train_loss=2.2519 eval_loss=2.2258 elapsed=421.3s
+[step 75] train_loss=2.2773 eval_loss=2.2471 elapsed=362.1s
+[step 175] train_loss=2.2312 eval_loss=2.2200 elapsed=491.6s
+[step 25] train_loss=2.4559 eval_loss=2.3497 elapsed=245.4s
+[step 100] train_loss=2.2452 eval_loss=2.2271 elapsed=484.0s
+[final] step=100 eval_loss=2.2271 elapsed=485.5s
+=== arxiv_astro_abstracts / muon / lr=2.0e-04 / batch_size=20 ===
+[step 200] train_loss=2.2450 eval_loss=2.2145 elapsed=562.4s
+[final] step=200 eval_loss=2.2145 elapsed=563.8s
+[step 50] train_loss=2.3349 eval_loss=2.2905 elapsed=365.1s
+[final] step=66 eval_loss=2.2556 elapsed=487.3s
+[step 50] train_loss=2.3385 eval_loss=2.2825 elapsed=487.4s
+[final] step=50 eval_loss=2.2825 elapsed=489.1s
+[step 25] train_loss=2.4673 eval_loss=2.3476 elapsed=309.9s
+[final] step=40 eval_loss=2.3039 elapsed=496.5s

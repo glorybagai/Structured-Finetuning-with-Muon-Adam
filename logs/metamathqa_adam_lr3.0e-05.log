@@ -1,10 +1,10 @@
-=== metamathqa / adam / lr=3.0e-05 ===
-[step 25] train_loss=0.2302 eval_loss=0.1934 elapsed=44.6s
-[step 50] train_loss=0.1759 eval_loss=0.1843 elapsed=88.4s
-[step 75] train_loss=0.1785 eval_loss=0.1829 elapsed=131.2s
-[step 100] train_loss=0.1747 eval_loss=0.1811 elapsed=175.3s
-[step 125] train_loss=0.1677 eval_loss=0.1807 elapsed=219.7s
-[step 150] train_loss=0.1671 eval_loss=0.1759 elapsed=263.4s
-[step 175] train_loss=0.1712 eval_loss=0.1770 elapsed=305.6s
-[step 200] train_loss=0.1650 eval_loss=0.1748 elapsed=352.0s
-[final] step=200 eval_loss=0.1748 elapsed=353.4s
+=== metamathqa / adam / lr=3.0e-05 / batch_size=4 ===
+[step 25] train_loss=0.2281 eval_loss=0.1927 elapsed=54.3s
+[step 50] train_loss=0.1813 eval_loss=0.1839 elapsed=107.8s
+[step 75] train_loss=0.1702 eval_loss=0.1833 elapsed=162.5s
+[step 100] train_loss=0.1692 eval_loss=0.1832 elapsed=219.0s
+[step 125] train_loss=0.1708 eval_loss=0.1785 elapsed=272.2s
+[step 150] train_loss=0.1688 eval_loss=0.1788 elapsed=325.2s
+[step 175] train_loss=0.1680 eval_loss=0.1772 elapsed=380.1s
+[step 200] train_loss=0.1671 eval_loss=0.1728 elapsed=433.5s
+[final] step=200 eval_loss=0.1728 elapsed=434.9s

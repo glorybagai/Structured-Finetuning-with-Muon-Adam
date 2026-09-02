@@ -1,0 +1,19 @@
+nohup: ignoring input
+warning: `VIRTUAL_ENV=/home/gbagai/Full_Fine_Tuning/.venv` does not match the project environment path `.venv` and will be ignored; use `--active` to target the active environment instead
+Experiment: bs_transfer_fixed
+Queued 5 runs across GPUs [2, 3, 4, 5, 6, 7]
+[gpu 2] START no_robots_muon_lr3.0e-04_bs4_aux3.5e-05
+[gpu 3] START no_robots_muon_lr3.0e-04_bs8_aux3.5e-05
+[gpu 4] START no_robots_muon_lr3.0e-04_bs12_aux3.5e-05
+[gpu 5] START no_robots_muon_lr3.0e-04_bs16_aux3.5e-05
+[gpu 6] START no_robots_muon_lr3.0e-04_bs20_aux3.5e-05
+[gpu 4] FAILED (exit 1): no_robots_muon_lr3.0e-04_bs12_aux3.5e-05 (log: sweep_logs/no_robots_muon_lr3.0e-04_bs12_aux3.5e-05.log)
+[gpu 6] FAILED (exit 1): no_robots_muon_lr3.0e-04_bs20_aux3.5e-05 (log: sweep_logs/no_robots_muon_lr3.0e-04_bs20_aux3.5e-05.log)
+[gpu 3] OK: no_robots_muon_lr3.0e-04_bs8_aux3.5e-05 (log: sweep_logs/no_robots_muon_lr3.0e-04_bs8_aux3.5e-05.log)
+[gpu 2] OK: no_robots_muon_lr3.0e-04_bs4_aux3.5e-05 (log: sweep_logs/no_robots_muon_lr3.0e-04_bs4_aux3.5e-05.log)
+[gpu 5] OK: no_robots_muon_lr3.0e-04_bs16_aux3.5e-05 (log: sweep_logs/no_robots_muon_lr3.0e-04_bs16_aux3.5e-05.log)
+
+=== SWEEP DONE (bs_transfer_fixed): 3/5 succeeded ===
+Failed runs:
+  no_robots_muon_lr3.0e-04_bs12_aux3.5e-05 (exit 1)
+  no_robots_muon_lr3.0e-04_bs20_aux3.5e-05 (exit 1)
