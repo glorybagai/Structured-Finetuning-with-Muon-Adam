@@ -12,3 +12,4 @@ logs/
 sweep_logs/
 sweep_full_bs_sweep.log
 sweep_full_bs_sweep.log
+results/
