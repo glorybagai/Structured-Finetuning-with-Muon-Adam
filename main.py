@@ -6,6 +6,7 @@ Run this from Full_Fine_Tuning_4datasets/:
     python main.py --experiment aux_bs_scaling --datasets no_robots --n_gpus 6
     python main.py --experiment aux_fine --datasets no_robots --n_gpus 6
     python main.py --experiment bs_transfer_fixed --datasets no_robots --n_gpus 6
+    python main.py --experiment full_bs_sweep --datasets no_robots --n_gpus 6
     python main.py --datasets no_robots --dry_run
 
 --experiment selects which job grid gets built:
@@ -17,6 +18,14 @@ Run this from Full_Fine_Tuning_4datasets/:
   bs_transfer_fixed -- batch_size swept with BOTH muon_lr and aux_lr pinned at the
                        single reference values, no retuning at all -- baseline for
                        how much retuning actually buys you
+  full_bs_sweep     -- MUON ONLY. effective batch size 4..2048 (micro-batch fixed at 4,
+                       reached purely via gradient_accumulation_steps) x 7-point muon_lr
+                       grid x 7-point aux_lr grid. n_train is held fixed (whatever
+                       Experiments.run's default is) across every batch size -- this is
+                       the CIFAR-style fixed-seen-datapoints design (per Jonas's question
+                       relayed by Antonio): step count varies inversely with batch size,
+                       examples seen does not. Adam is NOT included in this experiment --
+                       it gets its own separate sweep across the same batch range later.
 
 GPU SELECTION:
   - Default: auto-detects every GPU under the memory threshold.
@@ -60,6 +69,20 @@ AUX_LR_GRID_PER_BATCH = {
 }
 
 AUX_LR_FINE_GRID = [1.5e-5, 2e-5, 2.5e-5, 3e-5, 3.5e-5, 4e-5, 4.5e-5, 5e-5, 6e-5]
+
+# full_bs_sweep -- CIFAR-style fixed-seen-datapoints design (Jonas's question).
+# MUON ONLY. Adam gets its own separate sweep later, across the same batch
+# range, as its own experiment -- not included here. Micro-batch fixed at
+# FULL_BS_SWEEP_MICRO_BATCH; effective batch reached purely via
+# grad_accum_steps, so no new memory risk at any target.
+FULL_BS_SWEEP_EFFECTIVE_BATCHES = [4, 8, 16, 20, 32, 64, 128, 256, 512, 1024, 2048]
+FULL_BS_SWEEP_MICRO_BATCH = 4
+FULL_BS_SWEEP_MUON_LRS = [1e-4, 2e-4, 3e-4, 5e-4, 7.5e-4, 1.5e-3, 3e-3]
+FULL_BS_SWEEP_AUX_LRS = [1e-5, 2e-5, 3.5e-5, 7e-5, 1.5e-4, 3e-4, 6e-4]
+
+# Kept for a later, separate Adam-only sweep across the same batch range --
+# not used in build_jobs_full_bs_sweep below.
+FULL_BS_SWEEP_ADAM_LRS = [5e-6, 1e-5, 2.5e-5, 5e-5, 1e-4, 2e-4, 4e-4]
 
 DEFAULT_FREE_MEM_THRESHOLD_MIB = 1000
 
@@ -150,18 +173,45 @@ def build_jobs_bs_transfer_fixed(datasets):
     return jobs
 
 
+def build_jobs_full_bs_sweep(datasets):
+    """CIFAR-style fixed-seen-datapoints sweep across effective batch 4..2048,
+    MUON ONLY. Micro-batch fixed at FULL_BS_SWEEP_MICRO_BATCH; effective batch
+    reached purely via grad_accum_steps. n_train is NOT set here -- left at
+    Experiments.run's own default (6400) for every job, so every point shares
+    the same example budget (CIFAR's "fixed seen datapoints" design).
+
+    Full 3-way grid: 11 batch sizes x 7 muon_lr x 7 aux_lr = 539 jobs.
+    """
+    jobs = []
+    for dataset in datasets:
+        for eff_batch in FULL_BS_SWEEP_EFFECTIVE_BATCHES:
+            grad_accum = eff_batch // FULL_BS_SWEEP_MICRO_BATCH
+            for muon_lr in FULL_BS_SWEEP_MUON_LRS:
+                for aux_lr in FULL_BS_SWEEP_AUX_LRS:
+                    jobs.append({
+                        "dataset": dataset, "optimizer": "muon", "lr": muon_lr,
+                        "batch_size": FULL_BS_SWEEP_MICRO_BATCH,
+                        "grad_accum_steps": grad_accum, "aux_lr": aux_lr,
+                    })
+    return jobs
+
+
 EXPERIMENT_BUILDERS = {
     "aux_bs_scaling": build_jobs_aux_bs_scaling,
     "aux_fine": build_jobs_aux_fine,
     "bs_transfer_fixed": build_jobs_bs_transfer_fixed,
+    "full_bs_sweep": build_jobs_full_bs_sweep,
 }
 
 
 def run_job(job, gpu_id, extra_args, log_dir, dry_run):
     dataset, optimizer, lr, batch_size = job["dataset"], job["optimizer"], job["lr"], job["batch_size"]
     aux_lr = job.get("aux_lr")
+    grad_accum = job.get("grad_accum_steps")  # None => Experiments.run's own default (8) applies
 
-    tag = f"{dataset}_{optimizer}_lr{lr:.1e}_bs{batch_size}"
+    effective_batch = batch_size * (grad_accum if grad_accum is not None else 8)
+    tag = (f"{dataset}_{optimizer}_lr{lr:.1e}_micro{batch_size}"
+           f"_accum{grad_accum if grad_accum is not None else 8}_eff{effective_batch}")
     if aux_lr is not None:
         tag += f"_aux{aux_lr:.1e}"
     log_path = os.path.join(log_dir, f"{tag}.log")
@@ -174,6 +224,8 @@ def run_job(job, gpu_id, extra_args, log_dir, dry_run):
         "--batch_size", str(batch_size),
         "--gradient_checkpointing",
     ]
+    if grad_accum is not None:
+        cmd += ["--gradient_accumulation_steps", str(grad_accum)]
     if aux_lr is not None:
         cmd += ["--adamw_lr", str(aux_lr)]
     cmd += extra_args

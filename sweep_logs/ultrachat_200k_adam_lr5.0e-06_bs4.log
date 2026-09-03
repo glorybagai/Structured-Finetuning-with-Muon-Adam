@@ -1,12 +1,0 @@
-Loading model Qwen/Qwen3-4B...
-Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 18950.74it/s]
-Model loaded.
-Filter:   0%|          | 0/6400 [00:00<?, ? examples/s]Filter:  16%|█▌        | 1000/6400 [00:00<00:02, 2179.88 examples/s]Filter:  31%|███▏      | 2000/6400 [00:00<00:02, 2132.21 examples/s]Filter:  47%|████▋     | 3000/6400 [00:01<00:01, 2120.83 examples/s]Filter:  62%|██████▎   | 4000/6400 [00:01<00:01, 2092.16 examples/s]Filter:  78%|███████▊  | 5000/6400 [00:02<00:00, 2089.91 examples/s]Filter:  94%|█████████▍| 6000/6400 [00:02<00:00, 2080.28 examples/s]Filter: 100%|██████████| 6400/6400 [00:03<00:00, 2084.37 examples/s]Filter: 100%|██████████| 6400/6400 [00:03<00:00, 2096.33 examples/s]
-Filter:   0%|          | 0/100 [00:00<?, ? examples/s]Filter: 100%|██████████| 100/100 [00:00<00:00, 2221.34 examples/s]
-'ultrachat_200k': dropped 2169/6400 train and 37/100 test examples with no unmasked label tokens (prompt alone reached max_length=1024).
-[step 25] train_loss=1.2412 eval_loss=1.0389 elapsed=146.9s
-[step 50] train_loss=1.0105 eval_loss=1.0133 elapsed=291.0s
-[step 75] train_loss=1.0129 eval_loss=1.0044 elapsed=437.0s
-[step 100] train_loss=1.0018 eval_loss=0.9985 elapsed=583.4s
-[step 125] train_loss=0.9900 eval_loss=0.9949 elapsed=729.9s
-[final] step=132 eval_loss=0.9940 elapsed=774.2s

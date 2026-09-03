@@ -1,10 +1,0 @@
-Loading model Qwen/Qwen3-4B...
-Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 17258.37it/s]
-Model loaded.
-'ultrachat_200k': dropped 2169/6400 train and 37/100 test examples with no unmasked label tokens (prompt alone reached max_length=1024).
-[step 25] train_loss=1.2709 eval_loss=1.0280 elapsed=162.0s
-[step 50] train_loss=1.0028 eval_loss=0.9940 elapsed=322.5s
-[step 75] train_loss=1.0014 eval_loss=0.9815 elapsed=484.3s
-[step 100] train_loss=0.9639 eval_loss=0.9765 elapsed=645.5s
-[step 125] train_loss=0.9552 eval_loss=0.9734 elapsed=806.8s
-[final] step=132 eval_loss=0.9722 elapsed=855.1s

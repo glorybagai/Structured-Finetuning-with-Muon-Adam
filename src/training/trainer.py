@@ -19,18 +19,22 @@ Results and logs are split two ways:
     across no_robots / arxiv_astro_abstracts) so downstream analysis
     doesn't need to filter by dataset_name first. Rows are further keyed by
     optimizer_name, lr, batch_size, AND aux_lr, since a single dataset's
-    CSV now accumulates runs that vary all four (e.g. the batch-size sweep
-    and the aux_lr sweeps) -- without these as their own columns, rows from
-    different configs at the same (optimizer, lr) would be indistinguishable
-    from each other. aux_lr is None/blank for adam runs (adam has no aux
-    parameter group -- it's a single optimizer over everything).
+    CSV now accumulates runs that vary all four -- without these as their
+    own columns, rows from different configs at the same (optimizer, lr)
+    would be indistinguishable from each other. aux_lr is None/blank for
+    adam runs (adam has no aux parameter group -- it's a single optimizer
+    over everything).
 
   - logs/{dataset_name}_{optimizer_name}_lr{lr}.log -- a dedicated,
-    human-readable training curve for that single run (same lines that get
-    printed to stdout), separate from sweep_logs/ (which captures raw
-    subprocess stdout/stderr for the whole run including model-loading
-    noise, warnings, tracebacks, etc.). This file is just the clean
-    step-by-step train/eval loss history for that one config.
+    human-readable training curve for that single run.
+
+Example budget: train() runs exactly ONE pass over train_ds, regardless of
+batch_size -- this is deliberate (Jonas's "fixed number of examples"
+design): the number of examples seen is held constant across every batch
+size; optimizer-step count varies inversely with batch size as a
+consequence, not something separately controlled. Do not add an
+epoch-count/target-steps loop here without explicitly deciding to switch
+back to a fixed-STEPS design instead -- the two are mutually exclusive.
 """
 import csv
 import os
@@ -142,11 +146,13 @@ def train(
     collate_fn = make_collate_fn(tokenizer.pad_token_id)
     train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
     test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False, collate_fn=collate_fn)
+    n_micro_batches = len(train_loader)
 
     run_log_path = get_run_log_path(dataset_name, optimizer_name, lr)
     append_run_log(
         run_log_path,
         f"=== {dataset_name} / {optimizer_name} / lr={lr:.1e} / batch_size={batch_size} "
+        f"/ grad_accum={gradient_accumulation_steps} "
         f"/ aux_lr={aux_lr if aux_lr is not None else 'n/a'} ===",
     )
 
@@ -181,7 +187,21 @@ def train(
         running_loss += outputs.loss.item()
         running_count += 1
 
-        if (micro_step + 1) % gradient_accumulation_steps == 0:
+        # CHANGED: also flush on the last micro-batch of the epoch, even if
+        # it doesn't complete a full accumulation window. Without this,
+        # a trailing partial window (up to gradient_accumulation_steps - 1
+        # micro-batches) has its gradients computed but never applied --
+        # silently dropped rather than seen by the model. At large
+        # gradient_accumulation_steps (the full_bs_sweep experiment reaches
+        # 512) this was discarding up to ~3% of the nominal example budget,
+        # undermining the fixed-seen-datapoints premise specifically at the
+        # batch sizes where it matters most. Note: the trailing partial
+        # step's gradient is still divided by the FULL gradient_accumulation_steps
+        # (not the smaller actual count in that last window), so it acts as
+        # an intentionally small, under-scaled final update rather than a
+        # full-sized one -- harmless, and consistent with how the earlier
+        # fft_muon.py script (used to find aux_lr=3.5e-5) already handled this.
+        if (micro_step + 1) % gradient_accumulation_steps == 0 or (micro_step + 1) == n_micro_batches:
             torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
             optimizer.step()
             optimizer.zero_grad(set_to_none=True)

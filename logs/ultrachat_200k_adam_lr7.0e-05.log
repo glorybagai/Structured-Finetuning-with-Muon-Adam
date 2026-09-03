@@ -1,7 +1,0 @@
-=== ultrachat_200k / adam / lr=7.0e-05 / batch_size=4 ===
-[step 25] train_loss=1.1405 eval_loss=1.0607 elapsed=147.6s
-[step 50] train_loss=1.0312 eval_loss=1.0535 elapsed=294.7s
-[step 75] train_loss=1.0805 eval_loss=1.0603 elapsed=440.7s
-[step 100] train_loss=1.0564 eval_loss=1.0546 elapsed=586.0s
-[step 125] train_loss=1.0489 eval_loss=1.0620 elapsed=732.0s
-[final] step=132 eval_loss=1.0602 elapsed=775.5s

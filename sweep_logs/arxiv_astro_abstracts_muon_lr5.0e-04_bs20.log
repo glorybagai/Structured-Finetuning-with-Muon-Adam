@@ -1,8 +1,0 @@
-Loading model Qwen/Qwen3-4B...
-Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 16381.43it/s]
-[W830 14:06:35.748668169 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 7633633280 bytes (free: 2855862272, total: 101975851008).
-[W830 14:08:30.183322743 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 8107589632 bytes (free: 3579379712, total: 101975851008).
-Model loaded.
-NOTE: 'arxiv_astro_abstracts' is a gated dataset — make sure you've accepted its terms on the HF hub and are logged in (or pass a token).
-[step 25] train_loss=2.3654 eval_loss=2.2498 elapsed=314.2s
-[final] step=40 eval_loss=2.2071 elapsed=497.4s
