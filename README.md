@@ -367,8 +367,4 @@ This pipeline is intended to support research on:
 
 The Muon implementation is based on the reference design by Keller Jordan. Qwen models and datasets are provided by their respective contributors on Hugging Face.
 
-Please consult the original repositories and model or dataset licenses for attribution and usage requirements.
 
-## License
-
-Add the repository's intended license here. Verify the licensing terms of included code, model checkpoints, and datasets before redistribution.
